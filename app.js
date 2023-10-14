@@ -93,7 +93,7 @@ window.onload = function () {
 
     let activeRecording = setInterval(() => { })
     startButton.addEventListener("click", () => {
-        if (recording == false) {
+        if (recording == false & playing == false) {
             recording = true;
 
             stopAllAudio();
@@ -101,6 +101,7 @@ window.onload = function () {
             stopButton.src = "img/stop_active.svg";
 
             startButton.src = "img/record_active.svg";
+            playButton.src = "img/play_inactive.svg";
             setTimeout(() => {
                 startButton.src = "img/record.svg";
             }, 500);
@@ -124,6 +125,7 @@ window.onload = function () {
         clearInterval(activeRecording)
         startButton.src = "img/record.svg";
         stopButton.src = "img/stop.svg";
+        startButton.src = "img/record.svg";
         if (recordedAudio.length > 0) {
             playButton.src = "img/play.svg";
 
@@ -140,9 +142,10 @@ window.onload = function () {
 
     let playTimes = [];
     playButton.addEventListener("click", () => {
-        if (playing == false) {
+        if (playing == false & recording == false) {
             playing = true;
             playButton.src = "img/play_active.svg";
+            startButton.src = "img/record_inactive.svg";
 
 
             let currentTime = Date.now();
