@@ -1,8 +1,26 @@
+const buttons = document.querySelector("#buttons");
+const keyboard = document.querySelector("#keyboard");
+const ui = document.querySelector("#ui-hide");
+const landscapeText = document.querySelector("#landscape-text");
+
 const positionBlackKeys = function () {
+    // // don't allow proportions to be weird
+    // short and wide keys
+    keyboard.style.width = "90%"
+    if (keyboard.getBoundingClientRect().width > keyboard.getBoundingClientRect().height * 3) {
+        keyboard.style.width = `${keyboard.getBoundingClientRect().height * 3}px`
+    }
+    // long and thin keys
+    keyboard.style.height = "70%"
+    if (keyboard.getBoundingClientRect().height > keyboard.getBoundingClientRect().width * 0.65) {
+        keyboard.style.height = `${keyboard.getBoundingClientRect().width * 0.65}px`
+    }
 
     const whiteKeydDimensions = document.querySelector("#c").getBoundingClientRect();
     const whiteKeyWidth = whiteKeydDimensions.width;
     const whiteKeyHeight = whiteKeydDimensions.height;
+
+
 
     const blackKeys = document.querySelectorAll(".black-keys");
     for (let key of blackKeys) {
@@ -19,18 +37,13 @@ const positionBlackKeys = function () {
     }
 
 }
-
-const buttons = document.querySelector("#buttons");
-const keyboard = document.querySelector("#keyboard");
-const ui = document.querySelector("#ui-hide");
-const landscapeText = document.querySelector("#landscape-text");
 const checkOrientation = function () {
-    if (window.innerHeight < window.innerWidth | window.innerWidth > 500) {
+    if (window.innerHeight < window.innerWidth | window.innerWidth > 400) {
         ui.classList.remove("display-none");
         landscapeText.classList.add("display-none");
         positionBlackKeys()
     }
-    if (window.innerHeight > window.innerWidth & window.innerWidth < 500) {
+    if (window.innerHeight > window.innerWidth & window.innerWidth < 400) {
         ui.classList.add("display-none");
         landscapeText.classList.remove("display-none");
     }
@@ -58,6 +71,7 @@ window.onload = function () {
     let playing = false;
     let recordedAudio = [];
     let startTime;
+    let endTime;
 
     startButton.addEventListener("mouseenter", () => {
         if (recording == false & playing == false) {
@@ -117,6 +131,7 @@ window.onload = function () {
 
 
             recordedAudio = [];
+            endTime = null;
             startTime = Date.now();
         }
     })
@@ -132,17 +147,21 @@ window.onload = function () {
         }
 
 
+        if (recording) {
+            endTime = Date.now() - startTime;
+        }
+
         recording = false;
         playing = false;
 
         stopAllAudio();
-        endTime = Date.now();
+
         playTimes = playTimes.filter((time) => time > endTime);
     })
 
     let playTimes = [];
     playButton.addEventListener("click", () => {
-        if (playing == false & recording == false) {
+        if (playing == false & recording == false & recordedAudio.length > 0) {
             playing = true;
             playButton.src = "img/play_active.svg";
             startButton.src = "img/record_inactive.svg";
@@ -160,8 +179,13 @@ window.onload = function () {
                         PlaySound(`${recordedNote[0]}`)
                     }
                 }, recordedNote[1]);
-
             }
+            setTimeout(() => {
+                playButton.src = "img/play.svg";
+                startButton.src = "img/record.svg";
+                stopAllAudio()
+                playing = false;
+            }, endTime);
         }
 
     })
