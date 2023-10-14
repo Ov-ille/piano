@@ -71,7 +71,7 @@ window.onload = function () {
     let playing = false;
     let recordedAudio = [];
     let startTime;
-    let endTime;
+    let endTimeRecording;
 
     startButton.addEventListener("mouseenter", () => {
         if (recording == false & playing == false) {
@@ -148,15 +148,16 @@ window.onload = function () {
 
 
         if (recording) {
-            endTime = Date.now() - startTime;
+            endTimeRecording = Date.now() - startTime;
         }
-
+        if (playing) {
+            let endTimePlaying = Date.now()
+            playTimes = playTimes.filter((time) => time > endTimePlaying);
+        }
         recording = false;
         playing = false;
 
         stopAllAudio();
-
-        playTimes = playTimes.filter((time) => time > endTime);
     })
 
     let playTimes = [];
@@ -185,7 +186,7 @@ window.onload = function () {
                 startButton.src = "img/record.svg";
                 stopAllAudio()
                 playing = false;
-            }, endTime);
+            }, endTimeRecording);
         }
 
     })
