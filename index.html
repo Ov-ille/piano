@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>My Piano</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="landscape-text">Please use device in landscape mode!</div>
+        <div id="ui-hide" class="display-none">
+            <div id="ui">
+                <div id="buttons">
+                    <img src="img/record.svg" class="recording-btn" id="record-start">
+                    <img src="img/stop.svg" class="recording-btn" id="record-stop">
+                    <img src="img/play_inactive.svg" class="recording-btn" id="play">
+                </div>
+                <div id="keyboard">
+                    <div class="white-keyboard">
+                        <div class="keys white-keys" id="c"></div>
+                        <div class="keys white-keys" id="d"></div>
+                        <div class="keys white-keys" id="e"></div>
+                        <div class="keys white-keys" id="f"></div>
+                        <div class="keys white-keys" id="g"></div>
+                        <div class="keys white-keys" id="a"></div>
+                        <div class="keys white-keys" id="h"></div>
+                    </div>
+                    <div class="keys black-keys" id="c-sharp"></div>
+                    <div class="keys black-keys" id="d-sharp"></div>
+                    <div class="keys black-keys" id="f-sharp"></div>
+                    <div class="keys black-keys" id="g-sharp"></div>
+                    <div class="keys black-keys" id="a-sharp"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="audios">
+        <audio src="audio/c.mp3" id="c-audio"></audio>
+        <audio src="audio/c-sharp.mp3" id="c-sharp-audio"></audio>
+        <audio src="audio/d.mp3" id="d-audio"></audio>
+        <audio src="audio/d-sharp.mp3" id="d-sharp-audio"></audio>
+        <audio src="audio/e.mp3" id="e-audio"></audio>
+        <audio src="audio/f.mp3" id="f-audio"></audio>
+        <audio src="audio/f-sharp.mp3" id="f-sharp-audio"></audio>
+        <audio src="audio/g.mp3" id="g-audio"></audio>
+        <audio src="audio/g-sharp.mp3" id="g-sharp-audio"></audio>
+        <audio src="audio/a.mp3" id="a-audio"></audio>
+        <audio src="audio/a-sharp.mp3" id="a-sharp-audio"></audio>
+        <audio src="audio/h.mp3" id="h-audio"></audio>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
