@@ -6,9 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>My Piano</title>
+    <!-- piano audio from https://github.com/fuhton/piano-mp3 -->
 </head>
 
 <body>
+    <div id="song-list-backdrop" class="display-none">
+        <div id="song-list">
+            <ul></ul>
+        </div>
+    </div>
     <div class="container">
         <div id="landscape-text">Please use device in landscape mode!</div>
         <div id="ui-hide" class="display-none">
@@ -17,7 +23,11 @@
                     <img src="img/record.svg" class="recording-btn" id="record-start">
                     <img src="img/stop.svg" class="recording-btn" id="record-stop">
                     <img src="img/play_inactive.svg" class="recording-btn" id="play">
+                    <img src="img/folder_inactive.svg" class="recording-btn" id="folder">
                 </div>
+                <div id="current-song" class="visibility-hidden">selected song: <span id="current-song-name"></span>
+                </div>
+
                 <div id="keyboard">
                     <div class="white-keyboard">
                         <div class="keys white-keys" id="c"></div>
